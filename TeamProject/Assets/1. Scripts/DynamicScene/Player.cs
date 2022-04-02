@@ -15,7 +15,12 @@ public class Player : MonoBehaviour {
 	float directionY;
 
 
-	void Start ()
+    private void Awake()
+    {
+		Time.timeScale = 1;
+    }
+
+    void Start ()
 	{
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
