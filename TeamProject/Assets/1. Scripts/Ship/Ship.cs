@@ -40,6 +40,7 @@ public class Ship : MonoBehaviour
     }
     private void Update()
     {
+
         Move();
         Shooting();
     }
@@ -55,14 +56,17 @@ public class Ship : MonoBehaviour
         mouseDistance = Vector2.ClampMagnitude(mouseDistance, 1f);
 
         rollInput = Mathf.Lerp(rollInput, Input.GetAxisRaw("Roll"), roolAcc * Time.deltaTime);
-        transform.Rotate(-mouseDistance.y * lookRateSpeed * Time.deltaTime, mouseDistance.x * lookRateSpeed * Time.deltaTime, rollInput * rollSpeed * Time.deltaTime, Space.Self);
+        transform.Rotate(-mouseDistance.y * lookRateSpeed * Time.deltaTime,  //Y축
+                          mouseDistance.x * lookRateSpeed * Time.deltaTime, //X축
+                          rollInput * rollSpeed * Time.deltaTime, Space.Self); //Z축
 
         actForwardSpeed = Mathf.Lerp(actForwardSpeed, Input.GetAxisRaw("Vertical") * forwardSpeed, forwardAcc * Time.deltaTime);
         actLeftRightSpeed = Mathf.Lerp(actLeftRightSpeed, Input.GetAxisRaw("Horizontal") * leftRightSpeed, leftRightAcc * Time.deltaTime);
         actUpSpeed = Mathf.Lerp(actUpSpeed, Input.GetAxisRaw("Hover") * upSpeed, upAcc * Time.deltaTime);
 
-        transform.position += transform.forward * actForwardSpeed * Time.deltaTime;
-        transform.position += (transform.right * actLeftRightSpeed * Time.deltaTime) + (transform.up * actUpSpeed * Time.deltaTime);
+        transform.position += (transform.forward * actForwardSpeed * Time.deltaTime) //앞뒤
+                              + (transform.right * actLeftRightSpeed * Time.deltaTime) //양옆
+                              + (transform.up * actUpSpeed * Time.deltaTime); //위아래
     }
 
     void Shooting()
