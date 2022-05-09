@@ -5,6 +5,7 @@ public class Player : MonoBehaviour {
 
 	private Animator anim;
 	private CharacterController controller;
+	public GameObject setting;
 
 	public float speed = 5f;
 	public float turnSpeed = 150f;
@@ -33,6 +34,14 @@ public class Player : MonoBehaviour {
 			anim.SetInteger ("AnimationPar", 1);
 		}  else {
 			anim.SetInteger ("AnimationPar", 0);
+		}
+		if(Input.GetKeyDown(KeyCode.Escape))
+        {
+			Time.timeScale = 0;
+			setting.SetActive(true);
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
+
 		}
 
 		if (controller.isGrounded){
